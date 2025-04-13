@@ -17,8 +17,8 @@ def sorted_array_to_bst(arr, start, end):
     node.right = sorted_array_to_bst(arr, mid + 1, end)
 
     return node
-# set the parameters for the search method 
-def search(root, x): 
+# ITERATIVE APPROACH
+def iterative_search(root, x): 
     current_node = root
 
     #iterating through the loop with the intial condition
@@ -31,13 +31,29 @@ def search(root, x):
             current_node = current_node.left
     return False
 
+#RECURSIVE APPROACH
+def recursive_search(root, x):
+
+    if root is None or root.data == x:
+        return root
+    if root.data < x:
+        return recursive_search(root.right, x)
+    
+    return recursive_search(root.left, x)
+
+
 if __name__ == "__main__":
     sorted_array = [4, 8, 10, 12, 14, 20, 22]
     root = sorted_array_to_bst(sorted_array, 0, len(sorted_array) - 1)
 
     x = 12
-    print(search(root, x))  # True
+    print(iterative_search(root, x))  # True
 
-    print(search(root, 99)) 
+    print(iterative_search(root, 99)) 
+    
+    x = 20
+    print("True" if recursive_search(root, x) else "False")  # True
+
+    print("True" if recursive_search(root, 73) else "False") 
 
         
